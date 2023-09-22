@@ -75,6 +75,8 @@ export {
   footerImage,
   feature1,
   video1,
+  video2,
+  video3,
   logo,
   techImage,
   maritimImage,

@@ -6,6 +6,8 @@ import {
   client4,
   client5,
   client6,
+  client7,
+  client8,
   closeIcon,
   feature1,
   goalIcon,
@@ -18,6 +20,8 @@ import {
   upIcon,
   valuesIcon,
   video1,
+  video2,
+  video3,
   visionIcon,
 } from "../assets";
 import { useEffect, useState } from "react";
@@ -30,6 +34,8 @@ import Article from "../components/common/Article";
 import Container from "../components/layout/Container";
 import SignModal from "../components/layout/SignModal";
 import Testimonal from "../components/common/Testimonal";
+import Carrousel from "../components/layout/Carrousel/Carrousel";
+import { SwiperSlide } from "swiper/react";
 
 import { motion } from "framer-motion";
 import {
@@ -38,6 +44,8 @@ import {
   fromRight,
   fromTop,
 } from "../hooks/useAnimations";
+import { FreeMode, Pagination, Navigation } from "swiper";
+import { clients } from "../utils/clients";
 
 export default function Home() {
   useEffect(() => {
@@ -69,13 +77,35 @@ export default function Home() {
       </a>
       <section className="relative w-full xs:h-screen lg:h-screen md:h-[70vh]">
         <div className="w-full h-full bg-[#00000090] absolute top-0 left-0 z-10"></div>
-        <video
-          src={video1}
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-        />
+        <Carrousel modules={[Navigation, FreeMode]}>
+          <SwiperSlide>
+            <video
+              src={video1}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <video
+              src={video2}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <video
+              src={video3}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+            />
+          </SwiperSlide>
+        </Carrousel>
 
         <div
           id="home"
@@ -218,12 +248,12 @@ export default function Home() {
             </button>
           </header>
 
-          <div className="w-full flex items-center justify-center gap-8 py-32 flex-col">
+          <div className="w-full flex items-center justify-center gap-8 xs:py-8 md:py-36 flex-col">
             <motion.h1
               initial={fromTop.initial}
               whileInView={fromTop.animate}
               transition={fromTop.transition}
-              className="text-white text-6xl font-poppinsBold text-center "
+              className="text-white xs:text-4xl lg:text-5xl font-poppinsBold text-center "
             >
               Bem-vindo ao{" "}
               <span className="text-primary-color font-poppinsBold">
@@ -263,7 +293,7 @@ export default function Home() {
           transition={fromLeft.transition}
           className="flex flex-col gap-6 items-start"
         >
-          <Title className="text-primary-text text-3xl">
+          <Title className="text-primary-text xs:text-left text-3xl">
             Solicite um orçamento
           </Title>
 
@@ -582,22 +612,41 @@ export default function Home() {
           Nossos clientes escolheram-nos pela a excelência.
         </Text>
 
-        <div className="flex items-center gap-6 mt-6 flex-wrap justify-center">
-          <div>
-            <img src={client4} className="w-32" alt="" />
-          </div>
-          <div>
-            <img src={client2} className="w-32" alt="" />
-          </div>
-          <div>
-            <img src={client3} className="w-32" alt="" />
-          </div>
-          <div>
-            <img src={client5} className="w-32" alt="" />
-          </div>
-          <div>
-            <img src={client6} className="w-32" alt="" />
-          </div>
+        <div className="flex justify-center pt-10 w-full">
+          <Carrousel
+            style={{ paddingBottom: "70px" }}
+            settings={{
+              pagination: {
+                clickable: true,
+              },
+              spaceBetween: 0,
+              grabCursor: true,
+              loop: true,
+              breakpoints: {
+                360: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 1,
+                },
+                640: {
+                  slidesPerView: 5,
+                  slidesPerGroup: 2,
+                },
+                1200: {
+                  slidesPerView: 6,
+                  slidesPerGroup: 2,
+                },
+              },
+            }}
+            modules={[Pagination, FreeMode]}
+          >
+            {clients.map((client) => (
+              <SwiperSlide>
+                <div>
+                  <img src={client} className="w-32" alt="" />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Carrousel>
         </div>
       </Container>
 
@@ -613,11 +662,47 @@ export default function Home() {
           prestar serviços
         </Text>
 
-        <div className="flex items-center justify-center xs:flex-wrap lg:flex-nowrap gap-4 mt-6">
-          <Testimonal description="Recomendo vivamente o Grupo Singil a todas as empresas marítimas que buscam um parceiro completo e confiável. Eles superaram nossas expectativas em todas as áreas, e sua expertise em equipamentos marítimos, como câmeras térmicas, VHF, AIS, radares marítimos, VTS e a estação meteorológica 220WX da AIRMAR, juntamente com a conexão de internet via satélite, são fundamentais para o sucesso contínuo de nossas operações em todo o mundo." />
-
-          <Testimonal description="Recomendo vivamente o Grupo Singil a todas as empresas marítimas que buscam um parceiro completo e confiável. Eles superaram nossas expectativas em todas as áreas, e sua expertise em equipamentos marítimos, como câmeras térmicas, VHF, AIS, radares marítimos, VTS e a estação meteorológica 220WX da AIRMAR, juntamente com a conexão de internet via satélite, são fundamentais para o sucesso contínuo de nossas operações em todo o mundo." />
-        </div>
+        <Carrousel
+          style={{
+            paddingBottom: "70px",
+          }}
+          settings={{
+            pagination: {
+              clickable: true,
+            },
+            spaceBetween: 20,
+            grabCursor: true,
+            loop: true,
+            breakpoints: {
+              360: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+              },
+              640: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+              },
+              1200: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+              },
+            },
+          }}
+          modules={[Pagination, FreeMode]}
+        >
+          <SwiperSlide>
+            <Testimonal description="Recomendo vivamente o Grupo Singil a todas as empresas marítimas que buscam um parceiro completo e confiável. Eles superaram nossas expectativas em todas as áreas, e sua expertise em equipamentos marítimos, como câmeras térmicas, VHF, AIS, radares marítimos, VTS e a estação meteorológica 220WX da AIRMAR, juntamente com a conexão de internet via satélite, são fundamentais para o sucesso contínuo de nossas operações em todo o mundo." />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Testimonal description="Recomendo vivamente o Grupo Singil a todas as empresas marítimas que buscam um parceiro completo e confiável. Eles superaram nossas expectativas em todas as áreas, e sua expertise em equipamentos marítimos, como câmeras térmicas, VHF, AIS, radares marítimos, VTS e a estação meteorológica 220WX da AIRMAR, juntamente com a conexão de internet via satélite, são fundamentais para o sucesso contínuo de nossas operações em todo o mundo." />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Testimonal description="Recomendo vivamente o Grupo Singil a todas as empresas marítimas que buscam um parceiro completo e confiável. Eles superaram nossas expectativas em todas as áreas, e sua expertise em equipamentos marítimos, como câmeras térmicas, VHF, AIS, radares marítimos, VTS e a estação meteorológica 220WX da AIRMAR, juntamente com a conexão de internet via satélite, são fundamentais para o sucesso contínuo de nossas operações em todo o mundo." />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Testimonal description="Recomendo vivamente o Grupo Singil a todas as empresas marítimas que buscam um parceiro completo e confiável. Eles superaram nossas expectativas em todas as áreas, e sua expertise em equipamentos marítimos, como câmeras térmicas, VHF, AIS, radares marítimos, VTS e a estação meteorológica 220WX da AIRMAR, juntamente com a conexão de internet via satélite, são fundamentais para o sucesso contínuo de nossas operações em todo o mundo." />
+          </SwiperSlide>
+        </Carrousel>
       </Container>
 
       <Container className="flex-col py-32 items-center gap-4">

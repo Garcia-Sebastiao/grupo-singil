@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+.swiper {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}

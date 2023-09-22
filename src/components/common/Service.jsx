@@ -8,9 +8,9 @@ export default function Service({ image, title, children }) {
       initial={scaleAnimation.initial}
       whileInView={scaleAnimation.animate}
       transition={scaleAnimation.transition}
-      className="flex border-[1px] border-gray-200 rounded-md max-w-md"
+      className="flex border-[1px] xs:flex-wrap md:flex-nowrap border-gray-200 rounded-md max-w-md"
     >
-      <div className="w-[160px] flex-none h-auto">
+      <div className="md:w-[160px] xs:w-full flex-none h-auto">
         <img
           src={image}
           className="w-full rounded-l-md rounded-r-3xl h-full object-cover"
